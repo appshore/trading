@@ -9,7 +9,7 @@ import TableRow from '@material-ui/core/TableRow'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 
-import createStyled from '../../lib/createStyled'
+import createStyled from '../createStyled'
 
 const Styled = createStyled(theme => ({
   root: {
@@ -40,7 +40,7 @@ const OrderBook = props => (
     {({ classes }) => (
       <div className={classes.root}>
         <Toolbar>
-          <Typography variant="subheading" className={classes.header}>
+          <Typography variant="h5" className={classes.header}>
             ORDER BOOK <span className="classes.pair">{props.pair}</span>
           </Typography>
         </Toolbar>

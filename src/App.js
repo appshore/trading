@@ -5,10 +5,6 @@ import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider'
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme'
 import Grid from '@material-ui/core/Grid'
 
-import indigo from '@material-ui/core/colors/indigo'
-import pink from '@material-ui/core/colors/pink'
-import red from '@material-ui/core/colors/red'
-
 import { setApp } from './actions/appActions'
 import { getOrderBook } from './actions/orderBookActions'
 import { getTrades } from './actions/tradesActions'
@@ -18,14 +14,10 @@ import OrderBook from './components/OrderBook'
 import Ticker from './components/Ticker'
 import Trades from './components/Trades'
 
-import createStyled from './lib/createStyled'
+import createStyled from './components/createStyled'
 
 const theme = createMuiTheme({
-  palette: {
-    primary: indigo,
-    secondary: pink,
-    error: red
-  }
+  typography: { useNextVariants: true }
 })
 
 const Styled = createStyled({
@@ -43,7 +35,7 @@ class App extends React.Component {
 
   componentWillMount() {
     this.props.setApp()
-    this.props.getOrderBook({channel:'book', symbol: this.state.symbol})
+    this.props.getOrderBook({ channel: 'book', symbol: this.state.symbol })
     this.props.getTicker({ channel: 'ticker', symbol: this.state.symbol })
     this.props.getTrades({ channel: 'trades', symbol: this.state.symbol })
   }
@@ -54,7 +46,7 @@ class App extends React.Component {
         <Styled>
           {({ classes }) => (
             <div className={classes.app}>
-              <Grid container>
+              <Grid container spacing={8}>
                 <Grid item xs={9}>
                   <OrderBook />
                 </Grid>

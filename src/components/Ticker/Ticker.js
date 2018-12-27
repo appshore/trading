@@ -5,7 +5,7 @@ import Grid from '@material-ui/core/Grid'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import createStyled from '../../lib/createStyled'
+import createStyled from '../createStyled'
 import { getTicker } from '../../actions/tickerActions'
 
 const Styled = createStyled(theme => ({
@@ -27,12 +27,11 @@ const Ticker = props => (
         </Grid>
         <Grid item xs={5}>
           <div className="classes.pair">{props.pair}</div>
-          <span>{props.data && props.data[1]}</span>&nbsp;
-          <span>{props.data && props.data[2]}</span>&nbsp;
-          <span>{props.data && props.data[3]}</span>
+          <div>{props.data && props.data[1]}</div>
         </Grid>
         <Grid item xs={5}>
-          TICKER
+          <div>{props.data && props.data[2]}</div>
+          <div>{props.data && props.data[3]}</div>
         </Grid>
       </Grid>
     )}
