@@ -24,6 +24,10 @@ export const getTicker = ({channel, symbol}) => async (dispatch, getState) => {
     }
   }
 
+  socket.onerror = msg => {
+    console.error(`Socket ${channel} onerror`, msg)
+  }
+  
   dispatch({
     type: 'GET_TICKER_WAIT'
   })

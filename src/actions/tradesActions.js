@@ -27,6 +27,10 @@ export const getTrades = ({ channel, symbol }) => async (dispatch, getState) => 
     }
   }
 
+  socket.onerror = msg => {
+    console.error(`Socket ${channel} onerror`, msg)
+  }
+
   dispatch({
     type: 'GET_TRADES_WAIT'
   })
