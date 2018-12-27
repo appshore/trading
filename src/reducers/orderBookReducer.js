@@ -11,7 +11,6 @@ const orderBookReducer = (state = initState, action) => {
       }
       
     case 'DATA_ERROR':
-      console.log('login error', action)
       return state
 
     default:

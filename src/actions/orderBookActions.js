@@ -1,9 +1,5 @@
-export const getOrderBook = socket => dispatch => {
-  let socket = null
-  let channel = 'ticker'
-  let symbol = 'tBTCUSD'
-
-  socket = new WebSocket('wss://api.bitfinex.com/ws/2')
+export const getOrderBook = ({ channel, symbol }) => async (dispatch, getState) => {
+  let socket = new WebSocket('wss://api.bitfinex.com/ws/2')
 
   let sub = JSON.stringify({
     event: 'subscribe',
@@ -16,11 +12,16 @@ export const getOrderBook = socket => dispatch => {
   }
 
   socket.onmessage = msg => {
-    if (Array.isArray(msg.data) && Array.isArray(msg.data[1])) {
+    let data = JSON.parse(msg.data)
+    if (Array.isArray(data) && Array.isArray(data[1])) {
+
+      let rows = getState().book.data
+      rows.unshift(data[1])
+      
       dispatch({
         type: 'GET_ORDER',
         payload: {
-          data: msg.data[1]
+          data: rows.slice(0,10)
         }
       })
     }

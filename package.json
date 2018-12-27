@@ -1,7 +1,9 @@
 {
-  "name": "cryptotrading",
-  "license": "MIT",
+  "name": "trading",
   "version": "0.1.0",
+  "repository": "https://github.com/appshore/trading.git",
+  "author": "AppShore Inc",
+  "license": "MIT",
   "private": true,
   "dependencies": {
     "@date-io/date-fns": "^0.0.2",

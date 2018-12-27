@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
@@ -19,7 +20,7 @@ const Styled = createStyled(theme => ({
 }))
 
 const head = [
-  { id: 'time', numeric: false, disablePadding: false, label: 'TIME' },
+  { id: 'period', numeric: false, disablePadding: false, label: 'TIME' },
   { id: 'price', numeric: true, disablePadding: false, label: 'PRICE' },
   { id: 'amount', numeric: true, disablePadding: false, label: 'AMOUNT' }
 ]
@@ -41,22 +42,24 @@ const Trade = props => (
                   <TableCell
                     key={row.id}
                     align={row.numeric ? 'right' : 'left'}
-                    padding="none"
-                  />
+                    padding="none">
+                    {row.label}
+                  </TableCell>
                 )
               }, this)}
             </TableRow>
           </TableHead>
           <TableBody>
-            {Array.isArray(props.data) && props.data.map((row, idx) => {
-              return (
-                <TableRow role="checkbox" tabIndex={-1} key={idx}>
-                  <TableCell align="right">{row.time}</TableCell>
-                  <TableCell align="right">{row.price}</TableCell>
-                  <TableCell align="right">{row.amount}</TableCell>
-                </TableRow>
-              )
-            }, this)}
+            {props.data &&
+              props.data.map((row, idx) => {
+                return (
+                  <TableRow key={idx}>
+                    <TableCell align="right">{row[0]}</TableCell>
+                    <TableCell align="right">{row[1]}</TableCell>
+                    <TableCell align="right">{row[2]}</TableCell>
+                  </TableRow>
+                )
+              })}
           </TableBody>
         </Table>
       </div>
@@ -64,4 +67,11 @@ const Trade = props => (
   </Styled>
 )
 
-export default Trade
+const mapStateToProps = state => {
+  return {
+    pair: state.app.pair,
+    data: state.trades.data
+  }
+}
+
+export default connect(mapStateToProps)(Trade)

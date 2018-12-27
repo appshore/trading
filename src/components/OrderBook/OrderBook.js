@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
@@ -51,27 +52,29 @@ const OrderBook = props => (
                   <TableCell
                     key={row.id}
                     align={row.numeric ? 'right' : 'left'}
-                    padding="none"
-                  />
+                    padding="none">
+                    {row.label}
+                  </TableCell>
                 )
               }, this)}
             </TableRow>
           </TableHead>
           <TableBody>
-            {Array.isArray(props.data) && props.data.map((row, idx)=> {
-              return (
-                <TableRow tabIndex={-1} key={idx}>
-                  <TableCell align="right">{row[1]}</TableCell>
-                  <TableCell align="right">{row[2]}</TableCell>
-                  <TableCell align="right">{row[3]}</TableCell>
-                  <TableCell align="right">{row[4]}</TableCell>
-                  <TableCell align="right">{row[5]}</TableCell>
-                  <TableCell align="right">{row[6]}</TableCell>
-                  <TableCell align="right">{row[7]}</TableCell>
-                  <TableCell align="right">{row[8]}</TableCell>
-                </TableRow>
-              )
-            }, this)}
+            {props.data &&
+              props.data.map((row, idx) => {
+                return (
+                  <TableRow key={idx}>
+                    <TableCell align="right">{row[0]}</TableCell>
+                    <TableCell align="right">{row[1]}</TableCell>
+                    <TableCell align="right">{row[2]}</TableCell>
+                    <TableCell align="right">{row[3]}</TableCell>
+                    <TableCell align="right">{row[4]}</TableCell>
+                    <TableCell align="right">{row[5]}</TableCell>
+                    <TableCell align="right">{row[6]}</TableCell>
+                    <TableCell align="right">{row[7]}</TableCell>
+                  </TableRow>
+                )
+              }, this)}
           </TableBody>
         </Table>
       </div>
@@ -79,4 +82,11 @@ const OrderBook = props => (
   </Styled>
 )
 
-export default OrderBook
+const mapStateToProps = state => {
+  return {
+    pair: state.app.pair,
+    data: state.book.data
+  }
+}
+
+export default connect(mapStateToProps)(OrderBook)

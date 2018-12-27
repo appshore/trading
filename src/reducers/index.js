@@ -7,7 +7,7 @@ import tradesReducer from './tradesReducer'
 
 export default combineReducers({
   app: appReducer,
-  orderBook: orderBookReducer,
+  book: orderBookReducer,
   ticker: tickerReducer,
   trades: tradesReducer
 })

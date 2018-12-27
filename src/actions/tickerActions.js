@@ -1,9 +1,6 @@
-export const getTicker = () => dispatch => {
-  let socket = null
-  let channel = 'ticker'
-  let symbol = 'tBTCUSD'
 
-  socket = new WebSocket('wss://api.bitfinex.com/ws/2')
+export const getTicker = ({channel, symbol}) => async (dispatch, getState) => {
+  let socket = new WebSocket('wss://api.bitfinex.com/ws/2')
 
   let sub = JSON.stringify({
     event: 'subscribe',
@@ -16,11 +13,12 @@ export const getTicker = () => dispatch => {
   }
 
   socket.onmessage = msg => {
-    if (Array.isArray(msg.data) && Array.isArray(msg.data[1])) {
+    let data = JSON.parse(msg.data)
+    if (Array.isArray(data) && Array.isArray(data[1])) {
       dispatch({
         type: 'GET_TICKER',
         payload: {
-          data: msg.data[1]
+          data: data[1]
         }
       })
     }

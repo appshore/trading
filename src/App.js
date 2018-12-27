@@ -38,17 +38,14 @@ class App extends React.Component {
   socket = []
 
   state = {
-    symbol: 'tBTCUSD',
-    orderBook: [],
-    ticker: {},
-    trades: []
+    symbol: 'tBTCUSD'
   }
 
   componentWillMount() {
     this.props.setApp()
-    this.props.getOrderBook()
-    this.props.getTicker()
-    this.props.getTrades()
+    this.props.getOrderBook({channel:'book', symbol: this.state.symbol})
+    this.props.getTicker({ channel: 'ticker', symbol: this.state.symbol })
+    this.props.getTrades({ channel: 'trades', symbol: this.state.symbol })
   }
 
   render() {
@@ -59,24 +56,15 @@ class App extends React.Component {
             <div className={classes.app}>
               <Grid container>
                 <Grid item xs={9}>
-                  <OrderBook
-                    pair={this.props.app.pair}
-                    data={this.state.orderBook.data}
-                  />
+                  <OrderBook />
                 </Grid>
                 <Grid item xs={3}>
                   <Grid container direction="column">
                     <Grid item xs={12}>
-                      <Ticker
-                        pair={this.props.app.pair}
-                        data={this.props.ticker.data}
-                      />
+                      <Ticker />
                     </Grid>
                     <Grid item xs={12}>
-                      <Trades
-                        pair={this.props.app.pair}
-                        data={this.props.trades.data}
-                      />
+                      <Trades />
                     </Grid>
                   </Grid>
                 </Grid>
@@ -91,19 +79,18 @@ class App extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    app: state.app,
-    orderBook: state.orderBook,
-    ticker: state.ticker,
-    trades: state.trades
+    app: state.app
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     setApp: () => dispatch(setApp()),
-    getOrderBook: () => dispatch(getOrderBook()),
-    getTicker: () => dispatch(getTicker()),
-    getTrades: () => dispatch(getTrades())
+    getOrderBook: ({ channel, symbol }) =>
+      dispatch(getOrderBook({ channel, symbol })),
+    getTicker: ({ channel, symbol }) =>
+      dispatch(getTicker({ channel, symbol })),
+    getTrades: ({ channel, symbol }) => dispatch(getTrades({ channel, symbol }))
   }
 }
 
