@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider'
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme'
 import Grid from '@material-ui/core/Grid'
-import blue from '@material-ui/core/colors/blue'
 
 import { setApp } from './actions/appActions'
 import { getOrderBook } from './actions/orderBookActions'
