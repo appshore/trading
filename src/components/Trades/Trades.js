@@ -12,11 +12,9 @@ import Typography from '@material-ui/core/Typography'
 import createStyled from '../createStyled'
 
 const Styled = createStyled(theme => ({
-  root: {
-    // height: '80vh'
-    overflow: 'hidden'
-  },
-  header: {}
+  root: {},
+  header: {},
+  table: {}
 }))
 
 const head = [

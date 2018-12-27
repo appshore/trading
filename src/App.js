@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider'
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme'
 import Grid from '@material-ui/core/Grid'
+import blue from '@material-ui/core/colors/blue'
 
 import { setApp } from './actions/appActions'
 import { getOrderBook } from './actions/orderBookActions'
@@ -46,11 +47,11 @@ class App extends React.Component {
         <Styled>
           {({ classes }) => (
             <div className={classes.app}>
-              <Grid container spacing={8}>
-                <Grid item xs={9}>
+              <Grid container>
+                <Grid item xs={8}>
                   <OrderBook />
                 </Grid>
-                <Grid item xs={3}>
+                <Grid item xs={4}>
                   <Grid container direction="column">
                     <Grid item xs={12}>
                       <Ticker />
