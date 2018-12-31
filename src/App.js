@@ -27,13 +27,11 @@ const Styled = createStyled({
 })
 
 class App extends React.Component {
-  socket = []
-
   state = {
     symbol: 'tBTCUSD'
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.setApp()
     this.props.getOrderBook({ channel: 'book', symbol: this.state.symbol })
     this.props.getTicker({ channel: 'ticker', symbol: this.state.symbol })
@@ -78,10 +76,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     setApp: () => dispatch(setApp()),
-    getOrderBook: ({ channel, symbol }) =>
-      dispatch(getOrderBook({ channel, symbol })),
-    getTicker: ({ channel, symbol }) =>
-      dispatch(getTicker({ channel, symbol })),
+    getOrderBook: ({ channel, symbol }) => dispatch(getOrderBook({ channel, symbol })),
+    getTicker: ({ channel, symbol }) => dispatch(getTicker({ channel, symbol })),
     getTrades: ({ channel, symbol }) => dispatch(getTrades({ channel, symbol }))
   }
 }
