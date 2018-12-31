@@ -1,10 +1,12 @@
 {
   "name": "trading",
-  "version": "0.1.0",
-  "repository": "https://github.com/appshore/trading.git",
-  "author": "AppShore Inc",
+  "version": "0.2.0",
   "license": "MIT",
-  "private": true,
+  "author": "bmi",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/appshore/trading.git"
+  },
   "dependencies": {
     "@date-io/date-fns": "^0.0.2",
     "@fortawesome/fontawesome-svg-core": "^1.2.12",
